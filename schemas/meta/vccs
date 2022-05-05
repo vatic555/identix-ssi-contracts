@@ -1,0 +1,49 @@
+{
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
+    "$id": "https://schemas.identix.space/meta/vccs",
+    "title": "Verifiable Credentials Claims Specification",
+    "type": "object",
+    "properties": {
+        "id": { "ref": "/meta/did" },
+        "title": { "type": "string" },
+        "groups": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/claim_def_group" }
+        },
+        "additionalProperties": false
+    },
+    "$defs": {
+        "claim_def_group": {
+            "$anchor": "claim_def_group",
+            "$comment": "Claim definition group. Signed as a unit",
+            "type": "object",
+            "properties": {
+                "id": { "$ref": "/meta/did"},
+                "claims": {
+                    "type": "array",
+                    "items": { "$ref": "#/$defs/claim_def" },
+                    "minItems": 1,
+                    "uniqueItems": true
+                }
+            },
+            "required": [ "id", "claims" ],
+            "additionalProperties": false
+        },
+        "claim_def": {
+            "$anchor": "claim_def",
+            "$comment": "Claim definition",
+            "type": "object",
+            "properties": {
+                "predicate": { "$ref": "/meta/did" },
+                "controllers": {
+                    "type": "array",
+                    "items": { "enum": [ "holder", "issuer" ] },
+                    "minItems": 1,
+                    "uniqueItems": true
+                }
+            },
+            "required": [ "predicate" ],
+            "additionalProperties": false
+        }
+    }
+}

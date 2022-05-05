@@ -1,0 +1,14 @@
+{
+    "$schema": "https://schemas.identix.space/meta/vccs",
+    "id": "did:identixschemas/examples/vccs/proof_of_residency",
+    "groups": [
+        {
+            "id": "main",
+            "claims": [
+                { "predicate" : "did:identixschemas/officials/is_resident_of_country", "controllers": [ "issuer" ] },
+                { "predicate" : "did:identixschemas/officials/is_resident_of_city", "controllers": [ "issuer" ] },
+                { "predicate" : "did:identixschemas/officials/is_resident_of_address", "controllers": [ "issuer" ] }
+            ]
+        }
+    ]
+}

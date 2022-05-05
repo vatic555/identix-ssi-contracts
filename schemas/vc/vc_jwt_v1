@@ -1,0 +1,148 @@
+{
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
+    "$id": "https://schemas.identix.space/vc/vc_jwt_v1",
+    "title": "Verifiable Credentials Schema",
+
+    "type": "object",
+    "properties": {
+        "header": { "ref": "#/$defs/header" },
+        "payload": { "ref": "#/$defs/payload" },
+        // signature = ES256(base64UrlEncode(header) + "." + base64UrlEncode(payload), issuer_private_key)
+        // jwt = base64UrlEncode(header) + "." + base64UrlEncode(payload) + "." + base64UrlEncode(signature)
+        "jwt": { "ref": "/meta/jwt" }
+    },
+    "required": [ "header", "payload", "jwt" ],
+
+    "$defs": {
+        // MUST be Base64Url encoded
+        "header": {
+            "type": "object",
+            "properties": {
+                // Media type
+                // https://www.rfc-editor.org/rfc/rfc7519#section-5.1
+                // MUST be equal to "JWT"
+                "typ":{ "type": "string", "const": [ "JWT" ] },
+                // ECDSA25519 + SHA256
+                // Recommended by IETF: https://datatracker.ietf.org/doc/html/rfc7518#section-3.1
+                // ESHA256(base64UrlEncode(header) + "." + base64UrlEncode(payload), issuer_private_key)
+                "alg":{ "type": "string", "const": [ "ES256" ] }
+            }
+        },
+        // Payload
+        // MUST be normalized acc to ??? before signing or signature verification
+        // MUST be Base64Url encoded
+        "payload": {
+            "type": "object",
+            "properties": {
+                // DID of an Issuer
+                // https://www.rfc-editor.org/rfc/rfc7519#section-4.1.1
+                // MUST be present
+                "iss": { "$ref":  "/meta/did" },
+                // Intended VC audience
+                // https://www.rfc-editor.org/rfc/rfc7519#section-4.1.3
+                // OPTIONAL
+                "aud": {
+                    "type": "array",
+                    "items": {
+                        "type": { "$ref":  "/meta/did" }
+                    }
+                },
+                // Not Before date: start date of a validity period
+                // https://www.rfc-editor.org/rfc/rfc7519#section-4.1.5
+                // MUST be formatted according to https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap04.html#tag_04_16, as specified at https://www.rfc-editor.org/rfc/rfc7519#section-2
+                // OPTIONAL
+                "nbf": { "$ref":  "/meta/datetime" },
+                // issuance date
+                // https://www.rfc-editor.org/rfc/rfc7519#section-4.1.6
+                // MUST be formatted according to https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap04.html#tag_04_16
+                // MUST be present
+                "iat": { "$ref":  "/meta/datetime" },
+                // Unique identifier for the JWT
+                // https://www.rfc-editor.org/rfc/rfc7519#section-4.1.7
+                // MUST be equal to payload.vc.id
+                "jti": { "$ref":  "/meta/did" },
+                // vc: JSON object, which MUST be present in a JWT verifiable credential.
+                // https://www.w3.org/TR/vc-data-model/#json-web-token-extensions
+                // MUST be present
+                "vc": {
+                    "type": "object",
+                    "properties": {
+                        "@context": {
+                            // The value of the @context property MUST be an ordered set where the first item is a URI with the value https://www.w3.org/2018/credentials/v1.
+                            // MUST be present
+                            "type": "array",
+                            "prefixItems": [
+                                {
+                                    "type":  "string",
+                                    "const": "https://www.w3.org/2018/credentials/v1"
+                                }
+                            ],
+                            // may be more
+                            "items": true
+                        },
+                        // DID of the vc instance
+                        // https://www.w3.org/TR/vc-data-model/#identifiers
+                        // MUST be present
+                        "id": { "$ref": "/meta/did" },
+                        // VC type (schema) identifiers
+                        // MUST be present
+                        "type": { "type": "array", "items": "string" },
+                        // claims set
+                        // MUST be present
+                        "credentialSubject":
+                        {
+                            "type": "object",
+                            "properties": {
+                                // each group is a set of claims
+                                // Each claim group MUST be normalized acc to ??? before signing or signature verification
+                                "groups": {
+                                    "type": "array",
+                                    "items": {
+                                        "#anchor": "claim_group",
+                                        "type": "object",
+                                        "properties": {
+                                            "id": { "$ref": "/meta/did#did_fragment" },
+                                            "claims": {
+                                                "type": "array",
+                                                "items": {
+                                                    "$anchor": "claim",
+                                                    "type": "object",
+                                                    "patternProperties": {
+                                                        // subject DID
+                                                        "^s(ubject)?$": { "$ref": "/meta/did" },
+                                                        // registered predicate DID | property name
+                                                        "^p(redicate)$": { "$ref": "/meta/did" },
+                                                        // object | property value
+                                                        // currently, we only support simple value types
+                                                        "^o(bject)$": { "type": "string" }
+                                                    },
+                                                    "required": [ "subject", "predicate", "object" ],
+                                                    "additionalProperties": false
+                                                }
+                                            },
+                                            "signature": { "type": "string" }
+                                        },
+                                        "required": [ "id", "claims" ],
+                                        "additionalProperties": false
+                                    }
+                                }
+                            },
+                            "required": [ "groups" ],
+                            "additionalProperties": false
+                        },
+                        // If a JWS is present, the digital signature either refers to the issuer of the verifiable credential,
+                        // or in the case of a verifiable presentation, the holder of the verifiable credential.
+                        // The JWS proves that the issuer of the JWT signed the contained JWT payload and therefore, the proof property can be omitted.
+                        // https://www.w3.org/TR/vc-data-model/#jwt-encoding
+                        // NOT REQUIRED
+                        "proof": { }
+                    },
+                    "required": [ "@context", "id", "type", "credentialSubject" ],
+                    "additionalProperties": false
+                }
+            }
+        },
+        "required": [ "iss", "iat", "jti", "vc" ],
+        "additionalProperties": false
+    }
+}

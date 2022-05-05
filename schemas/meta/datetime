@@ -1,0 +1,19 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "https://schemas.identix.space/meta/datetime",
+    "title": "Serialized datetime struct",
+    "oneOf": [
+        { "$ref": "#/$defs/posix1_2017" },
+        { "$ref": "#/$defs/rfc_3339" }
+    ],
+    "$defs": {
+        "posix1_2017": {
+            "$anchor": "posix1_2017",
+            "type": "number"
+        },
+        "rfc_3339": {
+            "type": "string",
+            "pattern": "^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}(\.\d+)(Z|[+-]\d{2}:\d{2}))?"
+        }
+    }
+}

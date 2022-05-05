@@ -1,0 +1,58 @@
+{
+    "$schema": "https://schemas.identix.space/vc/vc_jwt_v1",
+    "header":
+    {
+        "typ": "JWT",
+        "alg": "ES256"
+    },
+    "payload":
+    {
+        "iss": "did.ever.issuer200",
+        "aud": [ "did:ever:verifiers300" ],
+        "nbf": "1541893810",
+        "iat": "1541493724",
+        "jti": "did.ever.vc123",
+        "vc":
+        {
+            "@context":[ "https://www.w3.org/2018/credentials/v1" ],
+            "id": "did.ever.vc123",
+            "type":
+            [
+                "VerifiableCredential",
+                "IdentixVerifiableCredential"
+            ],
+            "credentialSubject": {
+                "groups": [
+                    {
+                        "id": "names",
+                        "claims": [
+                            {
+                                "subject": "did:ever:holder100",
+                                "predicate": "did:identixschemas/core/has_first_name",
+                                "object": "Иван"
+                            },
+                            {
+                                "subject": "did:ever:holder100",
+                                "predicate": "did:identixschemas/core/has_last_name",
+                                "object": "Иванов"
+                            }
+                        ],
+                        "signature": "1234568790ACBDF"
+                    },
+                    {
+                        "id": "birth",
+                        "claims": [
+                            {
+                                "subject": "did:ever:holder100",
+                                "predicate": "did:identixschemas/core/was_born_on",
+                                "object": "22-01-1987"
+                            }
+                        ],
+                        "signature": "ACCBD1234568790AC"
+                    }
+                ]
+            }
+        }
+    },
+    "jwt": "hhh.ppp.sss"
+}

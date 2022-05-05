@@ -1,0 +1,62 @@
+{
+	"ABI version": 2,
+	"version": "2.2",
+	"header": ["pubkey", "time", "expire"],
+	"functions": [
+		{
+			"name": "constructor",
+			"inputs": [
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "transfer",
+			"inputs": [
+				{"name":"dest","type":"address"},
+				{"name":"value","type":"uint128"},
+				{"name":"bounce","type":"bool"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "claimGroups",
+			"inputs": [
+			],
+			"outputs": [
+				{"components":[{"name":"hmacHigh_groupDid","type":"uint64"},{"name":"hmacHigh_claimGroup","type":"uint64"},{"name":"signHighPart","type":"uint256"},{"name":"signLowPart","type":"uint256"}],"name":"claimGroups","type":"tuple[]"}
+			]
+		},
+		{
+			"name": "issuerPubKey",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"issuerPubKey","type":"uint256"}
+			]
+		},
+		{
+			"name": "codeVer",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"codeVer","type":"uint16"}
+			]
+		}
+	],
+	"data": [
+		{"components":[{"name":"hmacHigh_groupDid","type":"uint64"},{"name":"hmacHigh_claimGroup","type":"uint64"},{"name":"signHighPart","type":"uint256"},{"name":"signLowPart","type":"uint256"}],"key":1,"name":"claimGroups","type":"tuple[]"},
+		{"key":2,"name":"issuerPubKey","type":"uint256"}
+	],
+	"events": [
+	],
+	"fields": [
+		{"name":"_pubkey","type":"uint256"},
+		{"name":"_timestamp","type":"uint64"},
+		{"name":"_constructorFlag","type":"bool"},
+		{"components":[{"name":"hmacHigh_groupDid","type":"uint64"},{"name":"hmacHigh_claimGroup","type":"uint64"},{"name":"signHighPart","type":"uint256"},{"name":"signLowPart","type":"uint256"}],"name":"claimGroups","type":"tuple[]"},
+		{"name":"issuerPubKey","type":"uint256"},
+		{"name":"codeVer","type":"uint16"}
+	]
+}

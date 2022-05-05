@@ -1,0 +1,23 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "https://schemas.identix.space/meta/did",
+    "title": "Decentralized Identifier",
+    "oneOf": [
+        { "$ref": "#/$defs/did_absolute" },
+        { "$ref": "#/$defs/did_relative" }
+    ],
+    "$defs": {
+        "did_absolute": {
+            "type": "string",
+            "pattern": "^did(:([a-zA-Z0-9]+)+)(/[a-zA-Z0-9_-]+)*(#[a-zA-Z0-9_-]+)?$"
+        },
+        "did_relative": {
+            "type": "string",
+            "pattern": "(^/[a-zA-Z0-9_-]+$)|(^#[a-zA-Z0-9_-]+$)"
+        },
+        "did_fragment": {
+            "type": "string",
+            "pattern": "^#?[a-zA-Z0-9_-]+$"
+        }
+    }
+}

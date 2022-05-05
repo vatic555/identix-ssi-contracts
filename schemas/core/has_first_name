@@ -1,0 +1,9 @@
+{
+    "$schema": "https://schemas.identix.space/meta/predicate",
+    // comment
+    "id": "did:identixschemas/core/has_first_name",
+    "alias": "has_first_name",
+    "object_def": {
+        "expected_types": [ "string" ]
+    }
+}

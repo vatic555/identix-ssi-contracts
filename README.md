@@ -1,0 +1,1 @@
+# Anchoring subsystems and schemas for Everscale SSI Contest stage 4

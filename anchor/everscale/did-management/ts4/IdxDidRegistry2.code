@@ -1,0 +1,1203 @@
+.version sol 0.58.2
+
+.macro constructor
+DROP
+GETGLOB 2
+ISNULL
+IFREF {
+	CALL $c4_to_c7_with_init_storage$
+}
+GETGLOB 6
+THROWIF 51
+LDREF
+ENDS
+DEPTH
+ADDCONST -5
+PICK
+EQINT -1
+THROWIFNOT 71
+.loc IdxDidRegistry2.sol, 21
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+THROWIFNOT 204
+.loc IdxDidRegistry2.sol, 22
+ACCEPT
+.loc IdxDidRegistry2.sol, 23
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+SETGLOB 11
+.loc IdxDidRegistry2.sol, 24
+SETGLOB 10
+.loc IdxDidRegistry2.sol, 25
+PUSHINT 65280
+SETGLOB 13
+.loc IdxDidRegistry2.sol, 0
+CALLREF {
+	CALL $c7_to_c4$
+}
+THROW 0
+
+.macro echo
+DROP
+GETGLOB 6
+THROWIFNOT 76
+.loc IdxDidRegistry2.sol, 30
+LDU 32
+GETGLOB 4
+ROT
+SETINDEXQ 5
+SETGLOB 4
+LDREF
+ENDS
+.loc IdxDidRegistry2.sol, 0
+CALLREF {
+	CALL $echo_internal_macro$
+}
+OVER
+PUSHCONT {
+	PUSH S3
+	CTOS
+	LDU 2
+	LDMSGADDR
+	DROP
+	NIP
+	NEWC
+	STSLICECONST xc
+	STSLICE
+	PUSHINT 3729096370
+	STUR 130
+	STREF
+	ENDC
+	PUSHINT 0
+}
+PUSHCONT {
+	GETGLOB 4
+	DUP
+	INDEX 3
+	OVER
+	THIRD
+	GETGLOB 9
+	ROLL 3
+	SECOND
+	NEWC
+	STSLICECONST x2_
+	STI 1
+	STSLICECONST x1_
+	STSLICE
+	SWAP
+	STGRAMS
+	STDICT
+	PUSHINT 106
+	STZEROES
+	GETGLOB 4
+	INDEX 5
+	STUR 32
+	STREF
+	ENDC
+	GETGLOB 4
+	INDEX 4
+}
+IFELSE
+SENDRAWMSG
+IFREF {
+	CALL $upd_only_time_in_c4$
+}
+THROW 0
+
+.macro echo_internal_macro
+.loc IdxDidRegistry2.sol, 30
+DEPTH
+ADDCONST -5
+PICK
+EQINT -1
+THROWIFNOT 71
+.loc IdxDidRegistry2.sol, 142
+CALLREF {
+	CALL $isController_internal_macro$
+}
+THROWIFNOT 200
+.loc IdxDidRegistry2.sol, 143
+ACCEPT
+.loc IdxDidRegistry2.sol, 0
+
+.macro issueDidDoc
+DROP
+GETGLOB 6
+THROWIFNOT 76
+GETGLOB 2
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+.loc IdxDidRegistry2.sol, 39
+LDU 32
+GETGLOB 4
+ROT
+SETINDEXQ 5
+SETGLOB 4
+OVER
+PUSHCONT {
+	LDREF
+	ENDS
+	CTOS
+}
+IF
+LDU 256
+LDU 256
+LDREF
+ENDS
+CTOS
+LDMSGADDR
+ENDS
+.loc IdxDidRegistry2.sol, 0
+CALLREF {
+	CALL $issueDidDoc_internal_macro$
+}
+OVER
+PUSHCONT {
+	PUSH S3
+	CTOS
+	LDU 2
+	LDMSGADDR
+	DROP
+	NIP
+	NEWC
+	STSLICECONST xc
+	STSLICE
+	PUSHINT 1
+	STUR 98
+	SWAP
+	NEWC
+	STSLICECONST xf717a927
+	STSLICE
+	STBREFR
+	ENDC
+	PUSHINT 0
+}
+PUSHCONT {
+	GETGLOB 4
+	DUP
+	INDEX 3
+	OVER
+	THIRD
+	GETGLOB 9
+	ROLL 3
+	SECOND
+	NEWC
+	STSLICECONST x2_
+	STI 1
+	STSLICECONST x1_
+	STSLICE
+	SWAP
+	STGRAMS
+	STDICT
+	PUSHINT 1
+	STUR 106
+	SWAP
+	NEWC
+	GETGLOB 4
+	INDEX 5
+	STUR 32
+	STSLICE
+	STBREFR
+	ENDC
+	GETGLOB 4
+	INDEX 4
+}
+IFELSE
+SENDRAWMSG
+DROP
+CALLREF {
+	CALL $c7_to_c4$
+}
+THROW 0
+
+.macro issueDidDoc_internal_macro
+.loc IdxDidRegistry2.sol, 39
+DEPTH
+ADDCONST -5
+PICK
+EQINT -1
+THROWIFNOT 71
+.loc IdxDidRegistry2.sol, 142
+CALLREF {
+	CALL $isController_internal_macro$
+}
+THROWIFNOT 200
+.loc IdxDidRegistry2.sol, 143
+ACCEPT
+.loc IdxDidRegistry2.sol, 47
+OVER
+PUSHCONT {
+	OVER
+}
+PUSHCONT {
+	LTIME
+}
+IFELSE
+NEWC
+STU 256
+.loc IdxDidRegistry2.sol, 48
+GETGLOB 10
+CTOS
+SWAP
+ENDC
+
+CALLREF {
+	PUSH S1
+	PUSHSLICE x8adb35
+	SDEQ
+	PUSHREFCONT {
+		SWAP      ; salt sliceCode
+		LDREF
+		LDREF
+		DROP         ; salt selfCallCode usualSelector
+		XCHG S1, S2  ; selfCallCode salt usualSelector
+		CTOS         ; selfCallCode salt usualSelector
+		CALLREF {
+			
+			LDREFRTOS  ; selfCallCode salt restUsualSelector intSelector
+
+			PUSHSLICE xF4A4_
+			SDBEGINSX
+			LDDICT     ; selfCallCode salt restUsualSelector dict intSelector
+			LDU 10
+			NIP
+			DUP
+			SREFS      ; selfCallCode salt restUsualSelector dict intSelector refs
+			PUSHCONT {
+				LDREF
+			}
+			PUSHCONT {
+				PUSHREF {
+				}
+				SWAP
+			}
+			IFELSE
+		                ; selfCallCode salt restUsualSelector dict version intSelector
+			PUSHSLICE xF4A1
+			SDBEGINSX
+			DROP
+			            ; selfCallCode salt restUsualSelector dict version
+			SWAP        ; selfCallCode salt restUsualSelector version dict
+			NEWC        ; selfCallCode salt restUsualSelector version dict builder
+			STSLICECONST xF4A4_ ; DICTPUSHCONST
+			STDICT
+			PUSHINT 32
+			STUR 10
+			STSLICECONST xF4A1 ; DICTUGETJMP
+			STREF       ; selfCallCode salt restUsualSelector builder
+			XCHG S1, S2 ; selfCallCode restUsualSelector salt builder
+			STREF       ; selfCallCode restUsualSelector builder
+			NEWC        ; selfCallCode restUsualSelector builder usualBuilder
+			STBREF      ; selfCallCode restUsualSelector usualBuilder
+			STSLICE     ; selfCallCode usualBuilder
+
+		}
+		NEWC        ; selfCallCode usualBuilder mainBuilder
+		STSLICECONST x8adb35
+		XCHG S1, S2 ; usualBuilder selfCallCode mainBuilder
+		STREF
+		STBREF
+		ENDC
+	}
+	PUSHREFCONT {
+		SWAP
+		CALLREF {
+			
+			LDREFRTOS  ; selfCallCode salt restUsualSelector intSelector
+
+			PUSHSLICE xF4A4_
+			SDBEGINSX
+			LDDICT     ; selfCallCode salt restUsualSelector dict intSelector
+			LDU 10
+			NIP
+			DUP
+			SREFS      ; selfCallCode salt restUsualSelector dict intSelector refs
+			PUSHCONT {
+				LDREF
+			}
+			PUSHCONT {
+				PUSHREF {
+				}
+				SWAP
+			}
+			IFELSE
+		                ; selfCallCode salt restUsualSelector dict version intSelector
+			PUSHSLICE xF4A1
+			SDBEGINSX
+			DROP
+			            ; selfCallCode salt restUsualSelector dict version
+			SWAP        ; selfCallCode salt restUsualSelector version dict
+			NEWC        ; selfCallCode salt restUsualSelector version dict builder
+			STSLICECONST xF4A4_ ; DICTPUSHCONST
+			STDICT
+			PUSHINT 32
+			STUR 10
+			STSLICECONST xF4A1 ; DICTUGETJMP
+			STREF       ; selfCallCode salt restUsualSelector builder
+			XCHG S1, S2 ; selfCallCode restUsualSelector salt builder
+			STREF       ; selfCallCode restUsualSelector builder
+			NEWC        ; selfCallCode restUsualSelector builder usualBuilder
+			STBREF      ; selfCallCode restUsualSelector usualBuilder
+			STSLICE     ; selfCallCode usualBuilder
+
+		}
+		ENDC
+	}
+	IFELSE
+}
+.loc IdxDidRegistry2.sol, 50
+GETGLOB 2
+NEWC
+STU 256
+PUSHINT 0
+NEWDICT
+PUSHINT 64
+DICTUSETB
+PUSH S4
+NEWC
+STU 256
+PUSHINT 1
+ROT
+PUSHINT 64
+DICTUSETB
+MYADDR
+PUSHINT 2
+ROT
+PUSHINT 64
+DICTUSET
+NEWC
+STDICT
+ENDC
+SWAP
+NEWC
+STSLICECONST x2_
+STOPTREF
+STOPTREF
+STZERO
+ENDC
+.loc IdxDidRegistry2.sol, 62
+ROLL 3
+SWAP
+DUP
+HASHCU
+NEWC
+STSLICECONST x801_
+STU 256
+ENDC
+CTOS
+ROTREV
+PUSH S2
+NEWC
+STSLICECONST x62_
+STSLICE
+PUSHINT 2868722788230934574387753789225109188247555
+STUR 143
+OVER
+CALLREF {
+	CTOS
+	LDI 1
+	SWAP
+	PUSHCONT {
+		LDI 5
+		NIP
+	}
+	IF
+	LDI 1
+	SWAP
+	PUSHCONT {
+		LDI 2
+		NIP
+	}
+	IF
+	LDOPTREF
+	LDOPTREF
+	LDDICT
+	ENDS
+	BLKDROP 3
+}
+STREF
+STSLICECONST 1
+SWAP
+NEWC
+STSLICECONST x3c91e1c5
+STU 256
+STBREFR
+ENDC
+PUSHINT 0
+SENDRAWMSG
+.loc IdxDidRegistry2.sol, 69
+OVER
+PARSEMSGADDR
+INDEX 3
+PLDU 256
+PUSHCONT {
+	.loc IdxDidRegistry2.sol, 70
+	DUP2
+	NEWC
+	STSLICECONST x62_
+	STSLICE
+	PUSHINT 9789369574394656757036770681243717074945
+	STUR 135
+	SWAP
+	NEWC
+	STSLICECONST x15f2a76e
+	STSLICE
+	STBREFR
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+}
+PUSHCONT {
+	.loc IdxDidRegistry2.sol, 72
+	MYADDR
+	POP S2
+}
+IFELSE
+.loc IdxDidRegistry2.sol, 74
+SWAP
+GETGLOB 12
+DUP2
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	LDU 32
+	PLDDICT
+}
+PUSHCONT {
+	PUSHINT 0
+	NEWDICT
+}
+IFELSE
+PAIR
+PUXC S3, S-1
+UNPAIR
+OVER
+INC
+ROLLREV 3
+PUSHINT 32
+DICTUSET
+PAIR
+NEWC
+SWAP
+UNPAIR
+XCHG S2
+STU 32
+STDICT
+ROTREV
+PUSHINT 267
+DICTSETB
+SETGLOB 12
+.loc IdxDidRegistry2.sol, 76
+NIP
+.loc IdxDidRegistry2.sol, 0
+
+.macro getDidDocs
+DROP
+GETGLOB 6
+THROWIFNOT 76
+GETGLOB 2
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+.loc IdxDidRegistry2.sol, 79
+LDU 32
+GETGLOB 4
+ROT
+SETINDEXQ 5
+SETGLOB 4
+OVER
+PUSHCONT {
+	LDREF
+	ENDS
+	CTOS
+}
+IF
+LDMSGADDR
+ENDS
+.loc IdxDidRegistry2.sol, 0
+CALLREF {
+	CALL $getDidDocs_internal_macro$
+}
+OVER
+PUSHCONT {
+	PUSH S3
+	CTOS
+	LDU 2
+	LDMSGADDR
+	DROP
+	NIP
+	NEWC
+	STSLICECONST xc
+	STSLICE
+	PUSHINT 2287373611
+	STUR 130
+	SWAP
+	UNPAIR
+	XCHG S2
+	STU 32
+	STDICT
+	ENDC
+	PUSHINT 0
+}
+PUSHCONT {
+	GETGLOB 4
+	DUP
+	INDEX 3
+	OVER
+	THIRD
+	GETGLOB 9
+	ROLL 3
+	SECOND
+	NEWC
+	STSLICECONST x2_
+	STI 1
+	STSLICECONST x1_
+	STSLICE
+	SWAP
+	STGRAMS
+	STDICT
+	PUSHINT 106
+	STZEROES
+	GETGLOB 4
+	INDEX 5
+	STUR 32
+	SWAP
+	UNPAIR
+	XCHG S2
+	STU 32
+	STDICT
+	ENDC
+	GETGLOB 4
+	INDEX 4
+}
+IFELSE
+SENDRAWMSG
+IFREF {
+	CALL $upd_only_time_in_c4$
+}
+THROW 0
+
+.macro getDidDocs_internal_macro
+.loc IdxDidRegistry2.sol, 84
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+PUSHCONT {
+	.loc IdxDidRegistry2.sol, 86
+	GETGLOB 5
+	DUP
+	ISNULL
+	PUSHCONT {
+		DROP
+		PUSHINT 0
+	}
+	IF
+	GETGLOB 11
+	EQUAL
+	THROWIFNOT 200
+	.loc IdxDidRegistry2.sol, 87
+	ACCEPT
+	.loc IdxDidRegistry2.sol, 88
+	DUP
+	PARSEMSGADDR
+	INDEX 3
+	PLDU 256
+	PUSHCONT {
+		.loc IdxDidRegistry2.sol, 89
+		DROP
+		MYADDR
+		.loc IdxDidRegistry2.sol, 0
+	}
+	IFNOT
+}
+PUSHCONT {
+	.loc IdxDidRegistry2.sol, 94
+	GETGLOB 9
+	OVER
+	SDEQ
+	THROWIFNOT 200
+}
+IFELSE
+.loc IdxDidRegistry2.sol, 98
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	LDU 32
+	PLDDICT
+}
+PUSHCONT {
+	PUSHINT 0
+	NEWDICT
+}
+IFELSE
+PAIR
+.loc IdxDidRegistry2.sol, 0
+
+.macro setTemplate
+DROP
+GETGLOB 6
+THROWIFNOT 76
+GETGLOB 2
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+.loc IdxDidRegistry2.sol, 103
+LDREF
+ENDS
+.loc IdxDidRegistry2.sol, 0
+CALLREF {
+	CALL $setTemplate_internal_macro$
+}
+DROP
+CALLREF {
+	CALL $c7_to_c4$
+}
+THROW 0
+
+.macro setTemplate_internal_macro
+.loc IdxDidRegistry2.sol, 103
+DEPTH
+ADDCONST -5
+PICK
+EQINT -1
+THROWIFNOT 71
+.loc IdxDidRegistry2.sol, 142
+CALLREF {
+	CALL $isController_internal_macro$
+}
+THROWIFNOT 200
+.loc IdxDidRegistry2.sol, 143
+ACCEPT
+.loc IdxDidRegistry2.sol, 107
+SETGLOB 10
+.loc IdxDidRegistry2.sol, 0
+
+.macro upgrade
+DROP
+GETGLOB 6
+THROWIFNOT 76
+GETGLOB 2
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+.loc IdxDidRegistry2.sol, 111
+LDREF
+LDU 16
+ENDS
+.loc IdxDidRegistry2.sol, 0
+CALLREF {
+	CALL $upgrade_internal_macro$
+}
+DROP
+CALLREF {
+	CALL $c7_to_c4$
+}
+THROW 0
+
+.globl	upgrade_internal
+.type	upgrade_internal, @function
+CALL $upgrade_internal_macro$
+
+.macro upgrade_internal_macro
+.loc IdxDidRegistry2.sol, 142
+CALLREF {
+	CALL $isController_internal_macro$
+}
+THROWIFNOT 200
+.loc IdxDidRegistry2.sol, 143
+ACCEPT
+.loc IdxDidRegistry2.sol, 114
+DUP
+GETGLOB 13
+GREATER
+THROWIFNOT 206
+.loc IdxDidRegistry2.sol, 117
+GETGLOB 10
+NEWC
+STREF
+.loc IdxDidRegistry2.sol, 118
+GETGLOB 11
+SWAP
+STU 256
+.loc IdxDidRegistry2.sol, 119
+GETGLOB 12
+SWAP
+STDICT
+.loc IdxDidRegistry2.sol, 120
+STU 16
+.loc IdxDidRegistry2.sol, 122
+OVER
+SETCODE
+.loc IdxDidRegistry2.sol, 123
+SWAP
+CTOS
+DUP
+PUSHSLICE x8adb35
+SDEQ
+PUSHCONT {
+	PLDREFIDX 1
+	CTOS
+}
+IF
+PLDREF
+CTOS
+BLESS
+POP C3
+.loc IdxDidRegistry2.sol, 124
+ENDC
+CALLREF {
+	CALL $:onCodeUpgrade$
+}
+.loc IdxDidRegistry2.sol, 0
+
+.internal-alias :onCodeUpgrade, 2
+.internal :onCodeUpgrade
+.loc IdxDidRegistry2.sol, 130
+PUSHREF {
+}
+SETGLOB 10
+PUSHINT 0
+SETGLOB 11
+NEWDICT
+SETGLOB 12
+PUSHINT 0
+SETGLOB 13
+.loc IdxDidRegistry2.sol, 131
+CTOS
+.loc IdxDidRegistry2.sol, 132
+DUP
+LDREF
+POP S2
+SETGLOB 10
+.loc IdxDidRegistry2.sol, 133
+DUP
+LDU 256
+POP S2
+SETGLOB 11
+.loc IdxDidRegistry2.sol, 134
+DUP
+LDDICT
+POP S2
+SETGLOB 12
+.loc IdxDidRegistry2.sol, 135
+LDU 16
+DROP
+SETGLOB 13
+.loc IdxDidRegistry2.sol, 0
+CALLREF {
+	CALL $c7_to_c4$
+}
+COMMIT
+THROW 0
+
+.globl	isController_internal
+.type	isController_internal, @function
+CALL $isController_internal_macro$
+
+.macro isController_internal_macro
+.loc IdxDidRegistry2.sol, 151
+GETGLOB 11
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+EQUAL
+.loc IdxDidRegistry2.sol, 0
+
+.macro changeController
+DROP
+GETGLOB 6
+THROWIFNOT 76
+GETGLOB 2
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+.loc IdxDidRegistry2.sol, 154
+OVER
+PUSHCONT {
+	LDREF
+	ENDS
+	CTOS
+}
+IF
+LDU 256
+ENDS
+.loc IdxDidRegistry2.sol, 0
+CALLREF {
+	CALL $changeController_internal_macro$
+}
+DROP
+CALLREF {
+	CALL $c7_to_c4$
+}
+THROW 0
+
+.macro changeController_internal_macro
+.loc IdxDidRegistry2.sol, 157
+CALLREF {
+	CALL $isController_internal_macro$
+}
+THROWIFNOT 200
+.loc IdxDidRegistry2.sol, 158
+DUP
+THROWIFNOT 204
+.loc IdxDidRegistry2.sol, 159
+ACCEPT
+.loc IdxDidRegistry2.sol, 160
+SETGLOB 11
+.loc IdxDidRegistry2.sol, 0
+
+.macro transfer
+DROP
+GETGLOB 6
+THROWIFNOT 76
+.loc IdxDidRegistry2.sol, 164
+OVER
+PUSHCONT {
+	LDREF
+	ENDS
+	CTOS
+}
+IF
+LDMSGADDR
+LDU 128
+LDI 1
+ENDS
+.loc IdxDidRegistry2.sol, 0
+CALLREF {
+	CALL $transfer_internal_macro$
+}
+IFREF {
+	CALL $upd_only_time_in_c4$
+}
+THROW 0
+
+.globl	transfer_internal
+.type	transfer_internal, @function
+CALL $transfer_internal_macro$
+
+.macro transfer_internal_macro
+.loc IdxDidRegistry2.sol, 142
+CALLREF {
+	CALL $isController_internal_macro$
+}
+THROWIFNOT 200
+.loc IdxDidRegistry2.sol, 143
+ACCEPT
+.loc IdxDidRegistry2.sol, 168
+XCHG S1, S2
+NEWC
+STSLICECONST x6_
+STI 1
+STSLICECONST x1_
+STSLICE
+SWAP
+STGRAMS
+PUSHINT 107
+STZEROES
+ENDC
+PUSHINT 0
+SENDRAWMSG
+.loc IdxDidRegistry2.sol, 0
+
+.macro c4_to_c7
+PUSHROOT
+CTOS
+LDU 256 ; pubkey c4
+LDU 64 ; pubkey timestamp c4
+LDU 1 ; ctor flag
+NIP
+LDREF
+LDU 256
+LDDICT
+LDU 16
+ENDS
+SETGLOB 13
+SETGLOB 12
+SETGLOB 11
+SETGLOB 10
+SETGLOB 3
+SETGLOB 2
+
+.macro c4_to_c7_with_init_storage
+PUSHROOT
+CTOS
+SBITS
+GTINT 1
+PUSHCONT {
+	PUSHINT 0
+	PUSHROOT
+	CTOS
+	PLDDICT ; D
+	PUSHREF {
+	}
+	PUSHINT 0
+	NEWDICT
+	PUSHINT 0
+	SETGLOB 13
+	SETGLOB 12
+	SETGLOB 11
+	SETGLOB 10
+	PUSHINT 64
+	DICTUGET
+	THROWIFNOT 61
+	PLDU 256
+	SETGLOB 2
+	PUSHINT 0 ; timestamp
+	SETGLOB 3
+}
+IFREFELSE {
+	CALL $c4_to_c7$
+}
+
+.macro c7_to_c4
+GETGLOB 13
+GETGLOB 12
+GETGLOB 11
+GETGLOB 10
+GETGLOB 3
+GETGLOB 2
+NEWC
+STU 256
+STU 64
+STONE
+STREF
+STU 256
+STDICT
+STU 16
+ENDC
+POPROOT
+
+.macro upd_only_time_in_c4
+PUSHROOT
+CTOS
+LDU 256
+LDU 64
+NIP
+GETGLOB 3
+ROT
+NEWC
+STU 256
+STU 64
+STSLICE
+ENDC
+POPROOT
+
+.internal-alias :main_internal, 0
+.internal :main_internal
+PUSHROOT
+CTOS
+SBITS
+NEQINT 1
+SETGLOB 6
+PUSH S2
+CTOS
+LDU 4 ; bounced tail
+LDMSGADDR ; bounced src tail
+DROP
+SETGLOB 9
+MODPOW2 1
+GETGLOB 4
+TRUE
+SETINDEXQ 1
+PUSHINT 10000000
+SETINDEXQ 2
+NULL
+SETINDEXQ 3
+PUSHINT 0
+SETINDEXQ 4
+SETGLOB 4
+IFRET
+OVER
+SEMPTY ; isEmpty
+IFJMPREF {
+	GETGLOB 6
+	THROWIFNOT 76
+}
+OVER
+LDUQ 32  ; [funcId] body' ok
+THROWIFNOT 60
+OVER
+IFNOTJMPREF {
+	GETGLOB 6
+	THROWIFNOT 76
+}
+SWAP
+CALLREF {
+	CALL $public_function_selector$
+}
+THROW 60
+
+.internal-alias :main_external, -1
+.internal :main_external
+PUSHROOT
+CTOS
+SBITS
+NEQINT 1
+SETGLOB 6
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+SETGLOB 9
+OVER
+CALLREF {
+	CALL $c4_to_c7_with_init_storage$
+}
+LDU 1 ; haveSign msgSlice
+SWAP
+PUSHCONT {
+	PUSHINT 512
+	LDSLICEX ; signatureSlice msgSlice
+	DUP
+	HASHSU ; signatureSlice msgSlice hashMsgSlice
+	SWAP
+	LDU 1 ; signatureSlice hashMsgSlice havePubkey msgSlice
+	SWAP
+	PUSHCONT {
+		LDU 256 ; signatureSlice hashMsgSlice pubkey msgSlice
+		XCHG S3
+		SWAP
+	}
+	PUSHCONT {
+		XCHG S2
+		GETGLOB 2
+	}
+	IFELSE
+	DUP
+	SETGLOB 5
+	CHKSIGNU ; msgSlice isSigned
+	THROWIFNOT 40
+}
+PUSHCONT {
+	LDU 1 ; havePubkey msgSlice
+	SWAP
+	THROWIF 58
+}
+IFELSE
+LDU 64 ; timestamp msgSlice
+SWAP
+CALL $replay_protection_macro$
+LDU 32 ; expireAt msgSlice
+SWAP
+NOW ; msgSlice expireAt now
+GREATER ; msgSlice expireAt>now
+THROWIFNOT 57
+LDU 32 ; funcId body
+SWAP
+CALLREF {
+	CALL $public_function_selector$
+}
+THROW 60
+
+.macro codeVer
+DROP
+ENDS
+CALLREF {
+	CALL $c4_to_c7$
+}
+GETGLOB 13
+OVER
+PUSHCONT {
+	PUSHSLICE xc0000000000000000000000000ccf41cd6
+	NEWC
+	STSLICE
+	STU 16
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+}
+IF
+THROW 0
+
+.macro public_function_selector
+DUP
+PUSHINT 838116896
+LEQ
+IFJMPREF {
+	DUP
+	PUSHINT 93235917
+	EQUAL
+	IFJMPREF {
+		CALL $setTemplate$
+	}
+	DUP
+	PUSHINT 139889963
+	EQUAL
+	IFJMPREF {
+		CALL $getDidDocs$
+	}
+	DUP
+	PUSHINT 478865691
+	EQUAL
+	IFJMPREF {
+		CALL $constructor$
+	}
+	DUP
+	PUSHINT 838116896
+	EQUAL
+	IFJMPREF {
+		CALL $changeController$
+	}
+}
+DUP
+PUSHINT 1912291908
+LEQ
+IFJMPREF {
+	DUP
+	PUSHINT 1291066582
+	EQUAL
+	IFJMPREF {
+		CALL $codeVer$
+	}
+	DUP
+	PUSHINT 1581612722
+	EQUAL
+	IFJMPREF {
+		CALL $echo$
+	}
+	DUP
+	PUSHINT 1702734340
+	EQUAL
+	IFJMPREF {
+		CALL $transfer$
+	}
+	DUP
+	PUSHINT 1912291908
+	EQUAL
+	IFJMPREF {
+		CALL $upgrade$
+	}
+}
+DUP
+PUSHINT 1998039335
+EQUAL
+IFJMPREF {
+	CALL $issueDidDoc$
+}
+

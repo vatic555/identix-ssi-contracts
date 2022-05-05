@@ -1,0 +1,8 @@
+{
+    "$schema": "https://schemas.identix.space/meta/predicate",
+    "id": "did:identixschemas/core/was_born_on",
+    "alias": "was_born_on",
+    "object_def": {
+        "expected_types": [ "datetime" ]
+    }
+}
